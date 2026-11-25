@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>كالوري سكان - حاسبة السعرات بالصورة</title>
+  <!-- خط تجوال العربي العصري -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <!-- ربط ملف التنسيق -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- الشريط العلوي -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">🥗</span>
+        <div>
+          <h1>كالوري سكان</h1>
+          <p>تحليل الوجبات بالذكاء الاصطناعي</p>
+        </div>
+      </div>
+      <button id="settingsBtn" class="icon-btn" title="إعدادات الذكاء الاصطناعي">⚙️</button>
+    </header>
+
+    <!-- بطاقة ملخص اليوم -->
+    <section class="summary-card">
+      <div class="summary-top">
+        <div>
+          <span class="label">إجمالي سعرات اليوم</span>
+          <div class="total-calories">
+            <span id="totalCalories">0</span> <small>سعرة</small>
+          </div>
+        </div>
+        <div class="goal-badge">
+          الهدف: <span id="dailyGoalText">2000</span>
+        </div>
+      </div>
+
+      <!-- شريط التقدم -->
+      <div class="progress-bar">
+        <div id="caloriesProgress" class="progress-fill" style="width: 0%;"></div>
+      </div>
+
+      <!-- ملخص العناصر الغذائية لليوم -->
+      <div class="macros-summary">
+        <div class="macro-pill">
+          <span class="dot protein"></span>
+          <span>بروتين: <strong id="totalProtein">0</strong>غ</span>
+        </div>
+        <div class="macro-pill">
+          <span class="dot carbs"></span>
+          <span>كارب: <strong id="totalCarbs">0</strong>غ</span>
+        </div>
+        <div class="macro-pill">
+          <span class="dot fats"></span>
+          <span>دهون: <strong id="totalFats">0</strong>غ</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- منطقة التقاط أو رفع الصورة -->
+    <section class="upload-section">
+      <h2>أضف وجبتك الآن</h2>
+      <div class="action-buttons">
+        <!-- زر الكاميرا -->
+        <label class="action-card camera-btn">
+          <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden />
+          <span class="action-icon">📸</span>
+          <span class="action-title">تصوير الوجبة</span>
+          <span class="action-sub">فتح الكاميرا مباشرة</span>
+        </label>
+
+        <!-- زر الاستوديو -->
+        <label class="action-card gallery-btn">
+          <input type="file" id="galleryInput" accept="image/*" hidden />
+          <span class="action-icon">🖼️</span>
+          <span class="action-title">إدراج صورة</span>
+          <span class="action-sub">من الجهاز أو الاستوديو</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- منطقة التحليل والنتيجة (تظهر عند اختيار صورة) -->
+    <section id="resultSection" class="result-section hidden">
+      <div class="image-preview-box">
+        <img id="previewImage" src="" alt="صورة الوجبة" />
+        <div id="scannerOverlay" class="scanner-overlay hidden">
+          <div class="scan-line"></div>
+          <p>جاري تحليل مكونات الوجبة...</p>
+        </div>
+      </div>
+
+      <!-- بطاقة النتيجة -->
+      <div id="analysisCard" class="analysis-card hidden">
+        <div class="meal-header">
+          <div>
+            <h3 id="mealName">اسم الوجبة</h3>
+            <span id="mealWeight" class="weight-tag">الكمية التقديرية: --</span>
+          </div>
+          <div class="meal-cal-box">
+            <span id="mealCalories">0</span>
+            <small>سعرة</small>
+          </div>
+        </div>
+
+        <div class="meal-macros">
+          <div class="macro-box">
+            <span class="m-title">بروتين</span>
+            <strong id="mealProtein">0g</strong>
+          </div>
+          <div class="macro-box">
+            <span class="m-title">كربوهيدرات</span>
+            <strong id="mealCarbs">0g</strong>
+          </div>
+          <div class="macro-box">
+            <span class="m-title">دهون</span>
+            <strong id="mealFats">0g</strong>
+          </div>
+        </div>
+
+        <p id="mealAdvice" class="meal-advice"></p>
+
+        <div class="result-actions">
+          <button id="addMealBtn" class="btn-primary">➕ إضافة إلى سجل اليوم</button>
+          <button id="cancelResultBtn" class="btn-secondary">إلغاء</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- سجل وجبات اليوم -->
+    <section class="history-section">
+      <div class="history-header">
+        <h2>وجبات اليوم</h2>
+        <button id="clearHistoryBtn" class="text-btn">مسح الكل</button>
+      </div>
+      <div id="mealsList" class="meals-list">
+        <p class="empty-state">لم تقم بإضافة أي وجبة اليوم. التقط صورة لوجبتك للبدء!</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- نافذة الإعدادات (لإدخال مفتاح API وتعديل الهدف) -->
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>⚙️ إعدادات التطبيق</h3>
+        <button id="closeModalBtn" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <label for="dailyGoalInput">هدف السعرات اليومي:</label>
+        <input type="number" id="dailyGoalInput" value="2000" />
+
+        <label for="apiKeyInput">مفتاح Gemini API (للتعرف الحقيقي على الصور):</label>
+        <input type="password" id="apiKeyInput" placeholder="ألصق مفتاح AIza... هنا" />
+        <small class="hint">
+          بدون مفتاح، سيعمل التطبيق بوضع المحاكاة الذكي لتجربة التصميم. للحصول على مفتاح مجاني: Google AI Studio.
+        </small>
+      </div>
+      <div class="modal-footer">
+        <button id="saveSettingsBtn" class="btn-primary">حفظ الإعدادات</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ربط ملف الجافاسكربت -->
+  <script src="script.js"></script>
+</body>
+</html>

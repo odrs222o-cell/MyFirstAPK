@@ -1,0 +1,582 @@
+:root {
+  --primary: #10b981;
+  --primary-dark: #059669;
+  --primary-light: #d1fae5;
+  --bg-color: #f3f6f8;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --protein-color: #3b82f6;
+  --carbs-color: #f59e0b;
+  --fats-color: #ef4444;
+  --radius: 18px;
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Tajawal', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #e2e8f0;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* حاوية التطبيق بحجم الهاتف لتبدو كتطبيق حقيقي على اللابتوب والجوال */
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  padding: 20px 16px 40px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+}
+
+/* الشريط العلوي */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 32px;
+  background: var(--card-bg);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.logo p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.icon-btn {
+  background: var(--card-bg);
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.icon-btn:active {
+  transform: scale(0.92);
+}
+
+/* بطاقة ملخص اليوم */
+.summary-card {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: #ffffff;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 12px 25px rgba(16, 185, 129, 0.28);
+  margin-bottom: 22px;
+}
+
+.summary-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.summary-top .label {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.total-calories {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+.total-calories small {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.goal-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #ffffff;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.macros-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.macro-pill {
+  background: rgba(0, 0, 0, 0.14);
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot.protein { background: #60a5fa; }
+.dot.carbs { background: #fbbf24; }
+.dot.fats { background: #f87171; }
+
+/* أزرار التقاط ورفع الصورة */
+.upload-section h2,
+.history-header h2 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.action-card {
+  background: var(--card-bg);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius);
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+}
+
+.action-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.action-card:active {
+  transform: scale(0.97);
+}
+
+.action-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.action-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.action-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* منطقة معاينة الصورة والماسح الضوئي */
+.result-section {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+.image-preview-box {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  background: #0f172a;
+}
+
+.image-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scanner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.scanner-overlay p {
+  margin-top: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  background: rgba(16, 185, 129, 0.9);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #34d399;
+  box-shadow: 0 0 15px #34d399, 0 0 30px #10b981;
+  animation: scanMove 1.8s infinite ease-in-out;
+}
+
+@keyframes scanMove {
+  0% { top: 5%; }
+  50% { top: 92%; }
+  100% { top: 5%; }
+}
+
+/* بطاقة تفاصيل التحليل */
+.analysis-card {
+  padding: 18px;
+}
+
+.meal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.meal-header h3 {
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.weight-tag {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-color);
+  padding: 3px 10px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.meal-cal-box {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 8px 14px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.meal-cal-box span {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.meal-cal-box small {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.meal-macros {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.macro-box {
+  background: var(--bg-color);
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.macro-box .m-title {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.macro-box strong {
+  font-size: 16px;
+  color: var(--text-main);
+}
+
+.meal-advice {
+  background: #fffbeb;
+  border-right: 4px solid #f59e0b;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #92400e;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-primary {
+  flex: 2;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 13px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  flex: 1;
+  background: var(--bg-color);
+  color: var(--text-muted);
+  border: none;
+  padding: 13px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* سجل الوجبات */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.meals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 30px 15px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.meal-item {
+  background: var(--card-bg);
+  padding: 12px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+}
+
+.meal-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.meal-thumb {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.meal-item-info h4 {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.meal-item-info span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.meal-item-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meal-item-cal {
+  font-weight: 800;
+  color: var(--primary-dark);
+  font-size: 15px;
+}
+
+.delete-item-btn {
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* نافذة الإعدادات */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 100;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  width: 100%;
+  max-width: 400px;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.close-btn {
+  background: var(--bg-color);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.modal-body label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.modal-body input {
+  padding: 11px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal-body input:focus {
+  border-color: var(--primary);
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.modal-footer .btn-primary {
+  width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
